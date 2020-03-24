@@ -10,3 +10,4 @@ Utilizando Prometheus com ESP32
 ](https://github.com/theoretick/esp8266_prometheus_exporter_for_ds18b20_temperature_sensors)
 * [Example - Hello Server](https://github.com/espressif/arduino-esp32/blob/master/libraries/WebServer/examples/HelloServer/HelloServer.ino)
 * [Example - WiFiClientStaticIP](https://github.com/espressif/arduino-esp32/blob/master/libraries/WiFi/examples/WiFiClientStaticIP/WiFiClientStaticIP.ino)
+* [ESP32 internal temperature](https://github.com/espressif/arduino-esp32/issues/2422)
