@@ -348,7 +348,7 @@ curl -X POST 127.0.0.1:9090/-/reload
 
 Caso queira validar que o Prometheus continua funcionando normalmente e coletando as métricas do esp32, navegue até a url: http://IP_RASP:9090/targets
 
-Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"State Ok"**
+Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"State UP"**
 
 <p align="center">
   <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/prometheus-v1.png">
