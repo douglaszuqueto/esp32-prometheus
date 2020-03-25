@@ -41,7 +41,7 @@ Os serviços serão instalados levando-se em consideração o uso de uma Raspber
 
 ### Grafana
 
-Dashboard elegante com suporte a múltiplos banco de dados(datasources). 
+Serviço para compor dashboards elegantes de monitoramento de forma simples, a qual possui suporte a múltiplos banco de dados(datasources). 
 
 Ex: Prometheus, MySQL, PostgreSQL, dentre outros.
 
@@ -55,7 +55,7 @@ Exemplos de TSDB's:
 * TimescaleDB
 * Prometheus
 
-## Desenvolvendo o projeto *Monitorando o ESP32 com Grafana através do Prometheus*
+## Desenvolvendo o projeto *Monitorando o ESP32 com Prometheus através do Grafana*
 
 * Fazer diagrama de fluxo - draw.io
 
@@ -202,7 +202,7 @@ cd prometheus
 # 5º => /home/pi/services/prometheus
 pwd
 
-# 6º Criação do serviço do prometheus para e integrar ao systemd 
+# 6º Criação do serviço do prometheus para se integrar ao systemd assim como o grafana já está
 echo "
 [Unit]
 Description=Prometheus Server
@@ -237,7 +237,7 @@ sudo systemctl status prometheus
 
 ## Teste dos serviços instalados
 
-Se tudo der certo na instalação dos serviços, você poderá fazer os acessos conforme instruções abaixo:
+Se tudo deu certo na instalação dos serviços, você poderá fazer os acessos conforme instruções abaixo:
 
 * Grafana
 
@@ -256,8 +256,10 @@ http://IP_RASP:9090
 
 ```bash
 # 1º
-cat prometheus.yml
+cd /home/pi/services/prometheus
 
+# 2º
+cat prometheus.yml
 ```
 
 
@@ -340,24 +342,34 @@ Finalizando a configuração:
 curl -X POST 127.0.0.1:9090/-/reload
 ```
 
+Caso queira validar que o Prometheus continua funcionando normalmente e coletando as métricas do esp32, navegue até a url: http://IP_RASP:9090/targets
+
+Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"State Ok"**
+
+imagem prometheus
+![img]()
+
 ### Grafana
 
 #### Adicionando datasource
 
-Opção **Configuration** > **Datasources** > *Add data source*
+Navegue até o menu **Configuration** > **Datasources** > *Add data source*
 
 Na tela basicamente você precisa configurar apenas a variável **URL** localizada na seção *HTTP* com o IP da sua Raspberry
 
 Ex: http://192.168.0.150:9090
 
+imagem datasource
 ![img]()
 
 #### Importando a dashboard
 
-Copie o conteúdo do arquivo json localizado [aqui](https://raw.githubusercontent.com/douglaszuqueto/esp32-prometheus/master/.github/dashboard-v1.json).
+Copie o conteúdo do arquivo json localizado [aqui](https://github.com/douglaszuqueto/esp32-prometheus/blob/master/.github/dashboard-v1.json).
 
-No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copiado e clique em *load*. Na tele seguinte você pode alterar o nome da dashboard como também seu identificado - pode manter o mesmo em ambos!
+No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copiado e clique em *load*. Na tele seguinte você pode alterar o nome da dashboard como também seu identificador - pode manter o mesmo em ambos!
 
+imagem load
+![img]()
 
 ## Conclusão
 
