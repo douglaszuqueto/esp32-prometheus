@@ -378,6 +378,51 @@ No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copia
   <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-import-v1.png">
 </p>
 
+## Bônus
+
+Como bônus, será ensinado como você pode adicionar outros painéis com as devidas métricas oriundas do prometheus.
+
+Passos básicos:
+
+Com a dashboard aberta, clique em **Add Panel**, logo na sequência, **Add Query**.
+
+A tela ilustrada na figura abaixo será exibida:
+
+<p align="center">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-add-panel-v1.png">
+</p>
+
+Por padrão, na metade superior será apresentado um gráfico vazio e na parte inferior é onde você fará as configurações.
+
+Na parte inferior basicamente temos 4 menus, sendo eles:
+
+* Queries
+* Visualization
+* General
+* Alert
+
+Queries é o menu que fará a linkagem com o datasource - no nosso caso se trata do prometheus.
+
+Nesse menu, tempos um campo onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam usados no gráfico.
+
+Exemplo:
+
+```
+esp32_temperature{instance="$instance"}
+```
+
+Basicamente estamos requisitando a temperatura do esp filtrando pela "instância", que é o ip do esp. Essa instância é genérica, ou seja, você pode alterar entre os devices que estão integrados ao prometheus.
+
+Logo que a query é colocada no campo, o gráfico já é preenchido.
+
+### Criando um *Gauge*
+
+Baseando-se no exemplo acima, vamos navegar até o menu *Visualization* e trocar o gráfico por *Gauge*. E é isso, automaticamente o componente será mudado e preenchido com os valores, tudo isso devido ao datasource já estar configurado e com a query preenchida.
+
+### Criando uma *Table*
+
+Ainda com o exemplo anterior, apenas mude para o componente *Table*, percebe que o mesmo processo ocorre. Agora temos uma tabela de histórico das temperaturas :)
+
 ## Conclusão
 
 ## Referências
