@@ -59,7 +59,9 @@ Exemplos de TSDB's:
 
 Diagrama de fluxo
 
-![img](https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/diagrama-v1.png)
+<p align="center">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/diagrama-v1.png">
+</p>
 
 ## Criando métricas
 
