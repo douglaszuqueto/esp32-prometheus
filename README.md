@@ -380,30 +380,30 @@ No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copia
 
 ## Bônus
 
-Como bônus, será ensinado como você pode adicionar outros painéis com as devidas métricas oriundas do prometheus.
+Como bônus, será demonstrado como você pode adicionar outros painéis com as devidas métricas oriundas do prometheus.
 
 Passos básicos:
 
 Com a dashboard aberta, clique em **Add Panel**, logo na sequência, **Add Query**.
 
-A tela ilustrada na figura abaixo será exibida:
+Observe a tela na figura abaixo:
 
 <p align="center">
-  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-add-panel-v1.png">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-add-panel-v2.png">
 </p>
 
 Por padrão, na metade superior será apresentado um gráfico vazio e na parte inferior é onde você fará as configurações.
 
-Na parte inferior basicamente temos 4 menus, sendo eles:
+Na retangulo 1 basicamente temos 4 principais menus, sendo eles:
 
 * Queries
 * Visualization
 * General
 * Alert
 
-Queries é o menu que fará a linkagem com o datasource - no nosso caso se trata do prometheus.
+Queries é o menu que fará o link com o datasource - no nosso caso se trata do prometheus.
 
-Nesse menu, tempos um campo onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam usados no gráfico.
+Nesse menu, tempos um campo(retangulo 3) onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam usados no gráfico.
 
 Exemplo:
 
@@ -411,7 +411,7 @@ Exemplo:
 esp32_temperature{instance="$instance"}
 ```
 
-Basicamente estamos requisitando a temperatura do esp filtrando pela "instância", que é o ip do esp. Essa instância é genérica, ou seja, você pode alterar entre os devices que estão integrados ao prometheus.
+Basicamente estamos requisitando a temperatura do esp filtrando pela "instância", que é o ip do esp. Essa instância é genérica, ou seja, você pode alterar(select localizado no topo da dashboard) entre os devices que estão integrados ao prometheus.
 
 Logo que a query é colocada no campo, o gráfico já é preenchido.
 
