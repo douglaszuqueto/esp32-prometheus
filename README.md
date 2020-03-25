@@ -57,7 +57,9 @@ Exemplos de TSDB's:
 
 ## Desenvolvendo o projeto *Monitorando o ESP32 com Prometheus através do Grafana*
 
-* Fazer diagrama de fluxo - draw.io
+Diagrama de fluxo
+
+![img](https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/diagrama-v1.png)
 
 ## Criando métricas
 
