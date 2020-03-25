@@ -350,8 +350,9 @@ Caso queira validar que o Prometheus continua funcionando normalmente e coletand
 
 Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"State Ok"**
 
-imagem prometheus
-![img]()
+<p align="center">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/prometheus-v1.png">
+</p>
 
 ### Grafana
 
@@ -363,8 +364,9 @@ Na tela basicamente você precisa configurar apenas a variável **URL** localiza
 
 Ex: http://192.168.0.150:9090
 
-imagem datasource
-![img]()
+<p align="center">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-datasource-v1.png">
+</p>
 
 #### Importando a dashboard
 
@@ -372,8 +374,9 @@ Copie o conteúdo do arquivo json localizado [aqui](https://github.com/douglaszu
 
 No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copiado e clique em *load*. Na tele seguinte você pode alterar o nome da dashboard como também seu identificador - pode manter o mesmo em ambos!
 
-imagem load
-![img]()
+<p align="center">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-import-v1.png">
+</p>
 
 ## Conclusão
 
