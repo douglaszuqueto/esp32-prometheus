@@ -1,10 +1,14 @@
 # ESP32 Prometheus
 
-Utilizando Prometheus com ESP32
+Monitorando o ESP32 com Prometheus através do Grafana
 
 ![img](https://gblobscdn.gitbook.com/assets%2F-M15s4TnAJw6r_zYzKkX%2F-M3HLnucrqfFIB7ZmE3Q%2F-M3HMGF5p5p4hbrZabpI%2Fdashboard-v1.png?alt=media&token=8e621170-e22f-44cb-9ba9-64e4bf0e25b9)
 
 ## Introdução
+
+Em diversos projetos envolvendo sensoriamento, se faz necessário o monitoramento dos dispositivos conectados na rede. Dessa forma, necessitamos utilizar ou desenvolver sistemas capazes de suprir essa demanda.
+
+Nesse artigo, você aprenderá como desenvolver um sistema para monitoramento do ESP32 utilizando serviços de código aberto e gratuitos denominados Prometheus e Grafana.
 
 Portanto, por meio desse artigo você aprenderá:
 
@@ -16,6 +20,21 @@ Portanto, por meio desse artigo você aprenderá:
 * Integrar o Prometheus com ESP32
 * Criar a dashboard de monitoramento
 
+Agora, iniciaremos a apresentação completa do desenvolvimento do projeto Monitorando o ESP32 com Prometheus através do Grafana.
+
+## Desenvolvendo o projeto *Monitorando o ESP32 com Prometheus através do Grafana*
+
+Diagrama de fluxo
+
+<p align="center">
+  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/diagrama-v1.png">
+</p>
+
+## Materiais necessários
+
+* 01 x ESP32
+* 01 x Raspberry(ou qualquer outra SBC compatível / servidor)
+
 ## Métricas monitoradas
 
 * Uptime
@@ -24,16 +43,6 @@ Portanto, por meio desse artigo você aprenderá:
 * WiFi RSSI
 * Memória total/utilizada
 * Memória flash total/utilizada 
-
-## Materiais necessários
-
-* 01 x ESP32
-* 01 x Raspberry(ou qualquer outra SBC compátivel / servidor)
-
-## Tecnologias utilizadas
-
-* Grafana
-* Prometheus
 
 ## Serviços
 
@@ -55,14 +64,6 @@ Exemplos de TSDB's:
 * TimescaleDB
 * Prometheus
 
-## Desenvolvendo o projeto *Monitorando o ESP32 com Prometheus através do Grafana*
-
-Diagrama de fluxo
-
-<p align="center">
-  <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/diagrama-v1.png">
-</p>
-
 ## Criando métricas
 
 ### Tipos de métricas aplicáveis
@@ -83,11 +84,11 @@ Exemplos:
 esp32_uptime 23899
 ```
 
-Primeira e segunda linhas são referente a comentários envolvendo o nome da métrica, seu tipo e descrição
+Primeira e segunda linhas são referentes a comentários envolvendo o nome da métrica, seu tipo e descrição.
 
 Já a última linha, envolve o nome da métrica e seu devido valor.
 
-Como podemos ver, o formato é muito simples.
+Como podemos ver, o formato é muito simples e fácil de ser implementado manualmente conforme necessidade(exemplo do projeto).
 
 ### Função para abstrair a métrica a ser montada
 
@@ -106,6 +107,8 @@ void setMetric(String *p, String metric, String value) {
 Utilizando a função:
 
 ```c
+String p = "";
+
 String uptime = String(millis());
 
 setMetric(&p, "esp32_uptime", uptime);
@@ -113,11 +116,11 @@ setMetric(&p, "esp32_uptime", uptime);
 
 ### Firmware
 
-Baixe o repositório e faça o upload do firmware localizado na pasta **esp32-prometheus**
+Baixe o [repositório](https://github.com/douglaszuqueto/esp32-prometheus/archive/master.zip) e faça o upload do firmware localizado na pasta **esp32-prometheus**.
 
 *Obs:* Antes de fazer o upload não esqueça de configurar as credenciais da rede wifi como também o IP estático do esp de acordo com sua rede.
 
-Depois de efetuar o upload e o firmware estiver rodando, você pode acessar o webserver através da seguinte url: http://IP_ESP:80/metrics
+Depois de efetuar o upload e o firmware estiver rodando, você pode acessar o webserver através da seguinte url: http://IP_ESP:80/metrics.
 
 Ao acessar, você deverá observar o seguinte resultado:
 
@@ -151,6 +154,8 @@ esp32_temperature 46.11
 esp32_boot_counter 7
 ```
 
+Pode parecer meio bagunçado e confuso, mas nada mais é que o layout citado acima transformado para cada métrica que queremos monitorar.
+
 ## Instalação dos serviços
 
 ### Base
@@ -177,7 +182,7 @@ wget https://dl.grafana.com/oss/release/grafana_6.6.2_armhf.deb
 # 2º Efetuando a instalação
 sudo dpkg -i grafana_6.6.2_armhf.deb
 
-# 3º Habilitando o grafana para que inicie automaticamente ao iniciar a raspberry
+# 3º Habilitando o grafana para iniciar automaticamente ao iniciar a raspberry
 sudo systemctl enable grafana-server 
 
 # 4º Iniciando o serviço
@@ -248,6 +253,7 @@ Se tudo deu certo na instalação dos serviços, você poderá fazer os acessos 
 http://IP_RASP:3000
 
 User: admin
+
 Pass: admin
 
 * Prometheus
@@ -346,9 +352,9 @@ Finalizando a configuração:
 curl -X POST 127.0.0.1:9090/-/reload
 ```
 
-Caso queira validar que o Prometheus continua funcionando normalmente e coletando as métricas do esp32, navegue até a url: http://IP_RASP:9090/targets
+Caso queira validar que o Prometheus continua funcionando normalmente e coletando as métricas do esp32, navegue até a url: http://IP_RASP:9090/targets.
 
-Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"State UP"**
+Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"State UP"**.
 
 <p align="center">
   <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/prometheus-v1.png">
@@ -358,9 +364,9 @@ Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"S
 
 #### Adicionando datasource
 
-Navegue até o menu **Configuration** > **Datasources** > *Add data source*
+Navegue até o menu **Configuration** > **Datasources** > *Add data source*.
 
-Na tela basicamente você precisa configurar apenas a variável **URL** localizada na seção *HTTP* com o IP da sua Raspberry
+Na tela, basicamente você precisa configurar apenas a variável **URL** localizada na seção *HTTP* com o IP da sua Raspberry.
 
 Ex: http://192.168.0.150:9090
 
@@ -372,7 +378,7 @@ Ex: http://192.168.0.150:9090
 
 Copie o conteúdo do arquivo json localizado [aqui](https://github.com/douglaszuqueto/esp32-prometheus/blob/master/.github/dashboard-v1.json).
 
-No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copiado e clique em *load*. Na tele seguinte você pode alterar o nome da dashboard como também seu identificador - pode manter o mesmo em ambos!
+No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copiado e clique em *load*. Na tela seguinte você pode alterar o nome da dashboard como também seu identificador - pode manter o mesmo em ambos!
 
 <p align="center">
   <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-import-v1.png">
@@ -403,7 +409,7 @@ Na retangulo 1 basicamente temos 4 principais menus, sendo eles:
 
 Queries é o menu que fará o link com o datasource - no nosso caso se trata do prometheus.
 
-Nesse menu, tempos um campo(retangulo 3) onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam usados no gráfico.
+Nesse menu, temos um campo(retangulo 3) onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam utilizados no gráfico.
 
 Exemplo:
 
@@ -424,6 +430,15 @@ Baseando-se no exemplo acima, vamos navegar até o menu *Visualization* e trocar
 Ainda com o exemplo anterior, apenas mude para o componente *Table*, percebe que o mesmo processo ocorre. Agora temos uma tabela de histórico das temperaturas :)
 
 ## Conclusão
+
+Portanto, a partir do desenvolvimento desse projeto, foi possível montar um sistema simples e eficaz para monitoramento do ESP32 utilizando projetos de código aberto.
+
+Dentre as inúmeras formas de realizar tal monitoramento, essa talvez, seja uma das formas mais simples. Pois se faz necessário apenas um pouco de conhecimento para encaixar as peças.
+
+Foi obtido um resultado bem satisfatório, e com a dashboard pronta, você pode aproveitar para estudar como cada componente foi configurado, e assim, aprender a criar suas próprias dashboards de acordo com seu gosto e necessidades.
+
+Fizemos um uso simples das tecnologias, porém, pode se avançar bastante, incluindo sistemas de alerta via email, telegram dentre outros tipos que já são embarcados nas tecnologias utilizadas.
+
 
 ## Referências
 
