@@ -51,6 +51,8 @@ A Raspberry será onde ficará hospedado os serviços necessários para rodar o 
 
 ## Métricas monitoradas
 
+Monitorar algumas métricas de nossos dispositivos IoT são de suma importáncia, portanto veja na lista abaixo o que iremos será monitorado.
+
 * Uptime
 * Temperatura interna
 * Boot counter
@@ -58,7 +60,7 @@ A Raspberry será onde ficará hospedado os serviços necessários para rodar o 
 * Memória total/utilizada
 * Memória flash total/utilizada
 
-----
+Tendo uma noção das métricas que serão monitoradas, podemos ir para o próximo tópico onde iremos tratar sobre os dois serviços que serão utilizados no projeto.
 
 ## Serviços
 
@@ -84,13 +86,13 @@ Serviço para compor dashboards elegantes de monitoramento de forma simples, a q
 
 Ex: Prometheus, MySQL, PostgreSQL, dentre outros.
 
----
+Agora que sabemos um pouco mais sobre os serviços que utilizaremos neste projeto, podemos partir para a criação das métricas no prometheus.
 
-## Criando métricas
+## Métricas no Prometheus
 
----
+Para estar criando métricas e integrando ao prometheus, você precisa ter uma noção base dos tipos compátiveis e como cada métrica é montada respeitando o layout do serviço. 
 
-### Tipos de métricas
+### Tipos
 
 Como não temos nenhum cliente prometheus para o ESP32, se faz necessário montar manualmente as métricas, e dentre os tipos disponíveis do Prometheus, os mais acessíveis para se implementar são os citados logo abaixo.
 
@@ -104,7 +106,7 @@ Exemplos:
 
 Para implementação dessas métricas, temos que seguir um padrão determinado pelo prometheus, veja na sequência como deve ser esse modelo.
 
-### Layout do Prometheus
+### Layout
 
 O prometheus segue a risca um formato para que as métricas expostas se tornem válida. Então ele impõe uma estrutura e consequentemente precisamos nos adaptar a ela.
 
@@ -146,7 +148,7 @@ String uptime = String(millis());
 setMetric(&p, "esp32_uptime", uptime);
 ```
 
-Agora que já temos uma noção dos tipos de métricas aplicavéis, quais métricas serão monitoradas e principalmente o formato que devemos seguir, colocaremos a mão na massa começando com o firmware da nosso hardware.
+Agora que já temos uma noção dos tipos de métricas aplicáveis, quais métricas serão monitoradas e principalmente o formato que devemos seguir, colocaremos a mão na massa começando com o firmware da nosso hardware.
 
 ### Firmware
 
@@ -366,7 +368,7 @@ Portanto abre o arquivo *prometheus.yml* e adicione as seguintes configurações
     - targets: ['IP_ESP:80']
 ```
 
-*Obs:* Tente respeitar a identação do arquivo. A declaração acima deve estar alinhada com **- job_name:** que encontra-se logo acima.
+*Obs:* Tente respeitar a indentação do arquivo. A declaração acima deve estar alinhada com **- job_name:** que encontra-se logo acima.
 
 Finalizando a configuração:
 
@@ -435,7 +437,7 @@ Observe a tela na figura abaixo:
 
 Por padrão, na metade superior será apresentado um gráfico vazio e na parte inferior é onde você fará as configurações.
 
-Na retangulo 1 basicamente temos 4 principais menus, sendo eles:
+Na retângulo 1 basicamente temos 4 principais menus, sendo eles:
 
 * Queries
 * Visualization
@@ -444,7 +446,7 @@ Na retangulo 1 basicamente temos 4 principais menus, sendo eles:
 
 Queries é o menu que fará o link com o datasource - no nosso caso se trata do prometheus.
 
-Nesse menu, temos um campo(retangulo 3) onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam utilizados no gráfico.
+Nesse menu, temos um campo(retângulo 3) onde iremos inserir a respectiva query de consulta ao prometheus. Ela retornará os dados para que os mesmos sejam utilizados no gráfico.
 
 Exemplo:
 
