@@ -379,11 +379,11 @@ Se tiver sucesso, você terá uma tela como a da imagem abaixo mostrando um **"S
 
 Agora temos parte do diagrama de fluxo implementado. O prometheus já está apto a recolher as métricas do esp32 dentre o intervalo de 5 segundos.
 
-Com o prometheus já salvando os dados, resta adicionar a dashboard do grafan para começar o monitoramento do device.
+Com o prometheus já salvando os dados, resta adicionar a dashboard para começar o monitoramento do device.
 
 ### Grafana
 
-Por default, o grafana vem 'zerado', e como queremos pegar os dados salvos do prometheus, é necessário a criação/ configuração de um datasource.
+Por default, o grafana vem 'zerado', e como queremos pegar os dados salvos do prometheus, é necessário a criação/configuração de um datasource.
 
 #### Adicionando datasource
 
@@ -397,7 +397,7 @@ Ex: http://192.168.0.150:9090
   <img src="https://github.com/douglaszuqueto/esp32-prometheus/raw/master/.github/grafana-datasource-v1.png">
 </p>
 
-Com o datasource criado, já podemos importar a dashboard que eu desenvolvi.
+Com o datasource criado, já podemos importar a dashboard que foi especialmente desenvolvida para este projeto.
 
 #### Importando a dashboard
 
@@ -411,7 +411,7 @@ No grafana vá até a opção **Create(+)** > **Import**, cole o conteúdo copia
 
 Como foi visto, eu entreguei uma dashboard pronta para ser utilizada, ela é totalmente customizável. Como forma de estudo, recomendo que veja como cada painel foi configurado.
 
-Para não se extender muito neste projeto, deixarei um bônus para que você possa ter um gostinho de criar ulguns painéis.
+Para não se extender muito neste projeto, deixarei um bônus para que você possa ter um gostinho de como criar alguns painéis.
 
 ## Bônus
 
@@ -449,6 +449,8 @@ esp32_temperature{instance="$instance"}
 Basicamente estamos requisitando a temperatura do esp filtrando pela "instância", que é o ip do esp. Essa instância é genérica, ou seja, você pode alterar(select localizado no topo da dashboard) entre os devices que estão integrados ao prometheus.
 
 Logo que a query é colocada no campo, o gráfico já é preenchido.
+
+Veja abaixo como criar um *gauge* e uma *table*.
 
 ### Criando um *Gauge*
 
