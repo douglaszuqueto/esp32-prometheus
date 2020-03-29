@@ -6,11 +6,11 @@
 
 #define LED_BUILTIN 2
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = ""; // Coloque o nome de sua rede WiFi
+const char* password = ""; // Coloque a senha da sua rede WiFi
 
-IPAddress ip(192, 168, 0, 170);
-IPAddress gw(192, 168, 0, 1);
+IPAddress ip(192, 168, 0, 170); // Fixe um IP de acordo com sua rede
+IPAddress gw(192, 168, 0, 1); // Não esqueça de mudar o gateway caso a faixa de IP seja diferente
 IPAddress subnet(255, 255, 255, 0);
 
 WebServer server(80);

@@ -58,6 +58,8 @@ A Raspberry será onde ficará hospedado os serviços necessários para rodar o 
 * Memória total/utilizada
 * Memória flash total/utilizada
 
+----
+
 ## Serviços
 
 Os serviços serão instalados levando-se em consideração o uso de uma Raspberry PI. Caso deseja fazer em outro ambiente que seja baseado em Linux, os procedimentos serão bem parecidos :)
@@ -82,7 +84,11 @@ Serviço para compor dashboards elegantes de monitoramento de forma simples, a q
 
 Ex: Prometheus, MySQL, PostgreSQL, dentre outros.
 
+---
+
 ## Criando métricas
+
+---
 
 ### Tipos de métricas
 
